@@ -16,7 +16,8 @@ class EloquentLogsServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('eloquent-logs')
-            ->hasConfigFile()
-            ->hasMigration('create_eloquent-logs_table');
+            // ->hasConfigFile()
+            ->hasMigration('create_eloquent-logs_table')
+            ->runsMigrations();
     }
 }
