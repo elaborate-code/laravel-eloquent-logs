@@ -1,17 +1,18 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "elaborate-code/laravel-eloquent-logs",
+    "description": "This is my package laravel-eloquent-logs",
     "keywords": [
-        ":vendor_name",
+        "elaborate-code",
         "laravel",
-        ":package_slug"
+        "eloquent",
+        "laravel-eloquent-logs"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/elaborate-code/laravel-eloquent-logs",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "medilies",
+            "email": "medilies@gmail.com",
             "role": "Developer"
         }
     ],
@@ -30,18 +31,17 @@
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
-        "phpunit/phpunit": "^9.5",
-        "spatie/laravel-ray": "^1.26"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "ElaborateCode\\EloquentLogs\\": "src",
+            "ElaborateCode\\EloquentLogs\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "ElaborateCode\\EloquentLogs\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -56,10 +56,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "ElaborateCode\\EloquentLogs\\LaravelEloquentLogsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelEloquentLogs": "ElaborateCode\\EloquentLogs\\Facades\\LaravelEloquentLogs"
             }
         }
     },
