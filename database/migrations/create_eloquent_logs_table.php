@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('laravel_eloquent_logs_table', function (Blueprint $table) {
+        Schema::create('eloquent_logs_table', function (Blueprint $table) {
             $table->id();
 
             // add fields

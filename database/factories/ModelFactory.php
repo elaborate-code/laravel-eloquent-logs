@@ -1,6 +1,6 @@
 <?php
 
-namespace Elaborate-code\LaravelEloquentLogs\Database\Factories;
+namespace ElaborateCode\EloquentLogs\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

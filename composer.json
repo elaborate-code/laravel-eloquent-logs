@@ -1,6 +1,6 @@
 {
     "name": "elaborate-code/laravel-eloquent-logs",
-    "description": "This is my package laravel-eloquent-logs",
+    "description": "Log CRUD operations that happen on Eloquent models",
     "keywords": [
         "elaborate-code",
         "laravel",
@@ -56,11 +56,9 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ElaborateCode\\EloquentLogs\\LaravelEloquentLogsServiceProvider"
+                "ElaborateCode\\EloquentLogs\\EloquentLogsServiceProvider"
             ],
-            "aliases": {
-                "LaravelEloquentLogs": "ElaborateCode\\EloquentLogs\\Facades\\LaravelEloquentLogs"
-            }
+            "aliases": {}
         }
     },
     "minimum-stability": "dev",

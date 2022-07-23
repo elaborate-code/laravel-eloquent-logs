@@ -1,6 +1,6 @@
 <?php
 
-// config for Elaborate-code/LaravelEloquentLogs
+// config for ElaborateCode/EloquentLogs
 return [
 
 ];
