@@ -104,12 +104,6 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 Please see [CONTRIBUTING](https://github.com/elaborate-code/.github/blob/main/CONTRIBUTING.md) for details.
 
-### TODO
-
-- Add choice to use log files instead of the database.
-- Set on the models which listeners to register.
-- Fix the workflows.
-
 ## Security Vulnerabilities
 
 Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
