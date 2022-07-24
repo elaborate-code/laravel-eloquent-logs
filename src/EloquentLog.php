@@ -15,7 +15,14 @@ class EloquentLog extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->table = config('eloquent-logs.logs_table');
+    }
 
     public function loggable(): MorphTo
     {

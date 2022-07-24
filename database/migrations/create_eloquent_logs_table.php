@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('eloquent_logs', function (Blueprint $table) {
+        Schema::create(config('eloquent-logs.logs_table'), function (Blueprint $table) {
             $table->id();
             $table->morphs('loggable');
             $table->unsignedBigInteger('user_id')->index()->nullable();
