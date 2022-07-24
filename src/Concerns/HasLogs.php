@@ -23,7 +23,7 @@ trait HasLogs
 
     public static function log(Model $model, string $event): void
     {
-        $model->eloquentLogs()->create(['action' => $event, 'user_id' => Auth::id(),]);
+        $model->eloquentLogs()->create(['action' => $event, 'user_id' => Auth::id()]);
     }
 
     public function eloquentLogs(): MorphMany
