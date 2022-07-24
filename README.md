@@ -15,19 +15,19 @@ Install the package via composer:
 composer require elaborate-code/laravel-eloquent-logs
 ```
 
+Publish the migrations:
+
+```bash
+php artisan vendor:publish --tag="eloquent-logs-migrations"
+```
+
 Run the migrations:
 
 ```bash
 php artisan migrate
 ```
 
-### Publishing files [Optional]
-
-You can publish the migrations with:
-
-```bash
-php artisan vendor:publish --tag="eloquent-logs-migrations"
-```
+### Publishing config file [Optional]
 
 You can publish the config file with:
 
