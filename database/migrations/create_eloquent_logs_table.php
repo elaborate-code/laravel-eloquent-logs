@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('eloquent_logs', function (Blueprint $table) {
             $table->id();
             $table->morphs('loggable');
-            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('user_id')->index()->nullable();
             $table->string('action');
             $table->timestamps();
             $table->softDeletes();

@@ -1,13 +1,13 @@
 <?php
 
-namespace ElaborateCode\EloquentLogs;
+namespace ElaborateCode\EloquentLogs\Concerns;
 
+use ElaborateCode\EloquentLogs\EloquentLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 trait HasLogs
 {
-
     public static function bootHasLogs(): void
     {
         self::created(callback: fn ($model) => self::log($model, 'created'));
@@ -21,7 +21,6 @@ trait HasLogs
             'user_id' => Auth::id(),
         ]);
     }
-
 
     public function eloquentLogs()
     {

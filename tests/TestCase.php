@@ -2,9 +2,9 @@
 
 namespace ElaborateCode\EloquentLogs\Tests;
 
+use ElaborateCode\EloquentLogs\EloquentLogsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Elaborate-code\EloquentLogs\EloquentLogsServiceProvider;
 
 class TestCase extends Orchestra
 {

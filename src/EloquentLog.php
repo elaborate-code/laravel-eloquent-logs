@@ -24,6 +24,7 @@ class EloquentLog extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        /** @phpstan-ignore-next-line */
+        return $this->belongsTo(App\Models\User::class);
     }
 }
