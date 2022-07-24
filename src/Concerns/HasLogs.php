@@ -2,7 +2,6 @@
 
 namespace ElaborateCode\EloquentLogs\Concerns;
 
-use ElaborateCode\EloquentLogs\EloquentLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +14,9 @@ trait HasLogs
         self::deleted(callback: fn ($model) => self::log($model, 'deleted'));
 
         if (in_array('Illuminate\Database\Eloquent\SoftDeletes', (class_uses(self::class)))) {
-        self::trashed(callback: fn ($model) => self::log($model, 'trashed'));
-        self::restored(callback: fn ($model) => self::log($model, 'restored'));
-        self::forceDeleted(callback: fn ($model) => self::log($model, 'forceDeleted'));
+            self::trashed(callback: fn ($model) => self::log($model, 'trashed'));
+            self::restored(callback: fn ($model) => self::log($model, 'restored'));
+            self::forceDeleted(callback: fn ($model) => self::log($model, 'forceDeleted'));
         }
     }
 
@@ -31,6 +30,6 @@ trait HasLogs
 
     public function eloquentLogs()
     {
-        return $this->morphMany(EloquentLog::class, 'loggable');
+        return $this->morphMany(config('eloquent-logs.logs_model'), 'loggable');
     }
 }
