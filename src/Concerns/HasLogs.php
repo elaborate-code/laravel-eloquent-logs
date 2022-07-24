@@ -30,6 +30,6 @@ trait HasLogs
 
     public function eloquentLogs()
     {
-        return $this->morphMany(config('eloquent-logs.logs_model'), 'loggable');
+        return $this->morphMany(config('eloquent-logs.logs_model') ?? ElaborateCode\EloquentLogs\EloquentLog::class, 'loggable');
     }
 }
