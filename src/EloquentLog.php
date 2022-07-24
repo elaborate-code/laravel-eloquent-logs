@@ -21,7 +21,7 @@ class EloquentLog extends Model
     {
         parent::__construct($attributes);
 
-        $this->table = config('eloquent-logs.logs_table');
+        $this->table = config('eloquent-logs.logs_table') ?? 'eloquent_logs';
     }
 
     public function loggable(): MorphTo
@@ -31,6 +31,7 @@ class EloquentLog extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(config('eloquent-logs.user'), 'id', 'user_id');
+        /** @phpstan-ignore-next-line */
+        return $this->belongsTo(config('eloquent-logs.user') ?? \App\Models\User::class, 'id', 'user_id');
     }
 }
