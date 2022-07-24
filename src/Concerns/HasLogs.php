@@ -2,7 +2,6 @@
 
 namespace ElaborateCode\EloquentLogs\Concerns;
 
-use ElaborateCode\EloquentLogs\EloquentLog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,6 +30,6 @@ trait HasLogs
 
     public function eloquentLogs()
     {
-        return $this->morphMany(EloquentLog::class, 'loggable');
+        return $this->morphMany(config('eloquent-logs.logs_model'), 'loggable');
     }
 }
