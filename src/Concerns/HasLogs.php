@@ -12,11 +12,13 @@ trait HasLogs
     {
         self::created(callback: fn ($model) => self::log($model, 'created'));
         self::updated(callback: fn ($model) => self::log($model, 'updated'));
-        self::trashed(callback: fn ($model) => self::log($model, 'trashed'));
+        self::deleted(callback: fn ($model) => self::log($model, 'deleted'));
+
+        if (in_array('Illuminate\Database\Eloquent\SoftDeletes', (class_uses(self::class)))) {
         self::trashed(callback: fn ($model) => self::log($model, 'trashed'));
         self::restored(callback: fn ($model) => self::log($model, 'restored'));
         self::forceDeleted(callback: fn ($model) => self::log($model, 'forceDeleted'));
-        self::deleted(callback: fn ($model) => self::log($model, 'deleted'));
+        }
     }
 
     public static function log(Model $model, string $event)
