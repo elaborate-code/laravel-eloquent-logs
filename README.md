@@ -1,6 +1,3 @@
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
-
 # This is my package laravel-eloquent-logs
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/elaborate-code/laravel-eloquent-logs.svg?style=flat-square)](https://packagist.org/packages/elaborate-code/laravel-eloquent-logs)
@@ -35,13 +32,54 @@ This is the contents of the published config file:
 
 ```php
 return [
+    'logs_model' => \ElaborateCode\EloquentLogs\EloquentLog::class,
+    'logs_table' => 'eloquent_logs',
+
+    /** @phpstan-ignore-next-line */
+    'user' => \App\Models\User::class,
+
 ];
 ```
 
 ## Usage
 
+Pick an **Eloquent model** that you want to log the changes that happen to it and add the `HasLogs` trait to it.
+
 ```php
-// ...
+namespace App\Models;
+
+use ElaborateCode\EloquentLogs\Concerns\HasLogs; // Changed
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Example extends Model
+{
+    use HasFactory, HasLogs; // Changed
+    // ...
+}
+```
+
+Run the migrations to create the `eloquent_logs` table.
+
+### Muting Eloquent events
+
+You may wish to ignore the events at some part of your code, for example while seeding your application for development. You can achieve that buy using `ModelClass::unsetEventDispatcher()`.
+
+```php
+class DatabaseSeeder extends Seeder
+{
+    public function run()
+    {
+        foreach ([
+            Post::class,
+            Comment::class,
+        ] as $model) {
+            $model::unsetEventDispatcher();
+        }
+
+        // ...
+    }
+}
 ```
 
 ## Testing
