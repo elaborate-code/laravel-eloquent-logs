@@ -15,7 +15,7 @@ trait HasLogs
         self::deleted(callback: fn ($model) => self::log($model, 'deleted'));
 
         if (in_array('Illuminate\Database\Eloquent\SoftDeletes', (class_uses(self::class)))) {
-            self::trashed(callback: fn ($model) => self::log($model, 'trashed'));
+            self::softDeleted(callback: fn ($model) => self::log($model, 'soft deleted'));
             self::restored(callback: fn ($model) => self::log($model, 'restored'));
             self::forceDeleted(callback: fn ($model) => self::log($model, 'force deleted'));
         }
