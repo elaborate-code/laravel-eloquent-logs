@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-eloquent-logs` will be documented in this file.
 
+## 0.4.0 - 2022-07-24
+
+**Full Changelog**: https://github.com/elaborate-code/laravel-eloquent-logs/compare/0.3.0...0.4.0
+
 ## 0.3.0 - 2022-07-24
 
 ### What's Changed
