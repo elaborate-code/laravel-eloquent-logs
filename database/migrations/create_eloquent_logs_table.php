@@ -13,8 +13,8 @@ return new class extends Migration
             $table->morphs('loggable');
             $table->unsignedBigInteger('user_id')->index()->nullable();
             $table->string('action');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->timestamps(); // ? Not sure about having an updated_at field
+            $table->softDeletes(); // ? Not sure about this
         });
     }
 };

@@ -5,7 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/Check%20&%20fix%20styling?label=code%20style)](https://github.com/elaborate-code/laravel-eloquent-logs/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/elaborate-code/laravel-eloquent-logs.svg?style=flat-square)](https://packagist.org/packages/elaborate-code/laravel-eloquent-logs)
 
-Log the changes (`created`/`updated`/`deleted`/`trashed`/`restored`/`forceDeleted`) that occurs on your Eloquent models and check which user made them and when.
+Log the changes (`created`/`updated`/`deleted`/`soft deleted`/`restored`/`force deleted`) that occurs on your Eloquent models and check which user made them and when.
 
 ## Installation
 
@@ -21,7 +21,7 @@ Run the migrations:
 php artisan migrate
 ```
 
-### Publishing files
+### Publishing files [Optional]
 
 You can publish the migrations with:
 
@@ -65,30 +65,64 @@ class Example extends Model
 }
 ```
 
+After adding that trait, every change made to the model will be recorded.
+
 Important warning from [Laravel docs](https://laravel.com/docs/9.x/eloquent#events:~:text=When%20issuing%20a%20mass%20update%20or,when%20performing%20mass%20updates%20or%20deletes.)
 
 > When issuing a **mass update or delete** query via Eloquent, the `saved`, `updated`, `deleting`, and `deleted` model events will not be dispatched for the affected models. This is because the models are never actually retrieved when performing mass updates or deletes.
 
-### Muting Eloquent events
+### Retrieving logs
 
-You may wish to ignore the events at some part of your code, for example while seeding your application for development. You can achieve that buy using `ModelClass::unsetEventDispatcher()`.
+You can load a model's logs using the `eloquentLogs` relationship:
 
 ```php
+$example->eloquentLogs;
+
+$example->load('eloquentLogs');
+
+App\Models\Example::with('eloquentLogs')->find($id);
+```
+
+And you can query logs directly:
+
+```php
+// latest 5 logs with affected models
+ElaborateCode\EloquentLogs\EloquentLog::with('loggable')->latest()->limit(5)->get()
+```
+
+### Muting Eloquent events
+
+From seeders:
+
+```php
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
 class DatabaseSeeder extends Seeder
 {
-    public function run()
-    {
-        foreach ([
-            Post::class,
-            Comment::class,
-        ] as $model) {
-            $model::unsetEventDispatcher();
-        }
+    use WithoutModelEvents;
 
-        // ...
+    public function run(): void
+    {
+        // Silent eloquent queries ...
     }
 }
 ```
+
+Anywhere from your code:
+
+```php
+\Illuminate\Database\Eloquent\Model::unsetEventDispatcher();
+
+// Silent eloquent queries ...
+
+\Illuminate\Database\Eloquent\Model::setEventDispatcher(app(Dispatcher::class));
+// ...
+```
+
+Explore the [Eloquent docs](https://laravel.com/docs/9.x/eloquent#muting-events) for more options
 
 ## Testing
 
