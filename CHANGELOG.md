@@ -1,3 +1,15 @@
 # Changelog
 
 All notable changes to `laravel-eloquent-logs` will be documented in this file.
+
+## 0.1.0-beta - 2022-07-24
+
+### What's Changed
+
+- FIX: pestphp/pest-plugin workflow error by @medilies in https://github.com/elaborate-code/laravel-eloquent-logs/pull/1
+
+### New Contributors
+
+- @medilies made their first contribution in https://github.com/elaborate-code/laravel-eloquent-logs/pull/1
+
+**Full Changelog**: https://github.com/elaborate-code/laravel-eloquent-logs/commits/0.1.0-beta
