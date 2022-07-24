@@ -39,7 +39,7 @@ This is the contents of the published config file:
 
 ```php
 return [
-    'logs_model' => \ElaborateCode\EloquentLogs\EloquentLog::class,
+    'logs_model' => \ElaborateCode\EloquentLogs\Models\EloquentLog::class,
     'logs_table' => 'eloquent_logs',
 
     /** @phpstan-ignore-next-line */
@@ -87,7 +87,7 @@ And you can query logs directly:
 
 ```php
 // latest 5 logs with affected models
-ElaborateCode\EloquentLogs\EloquentLog::with('loggable')->latest()->limit(5)->get()
+ElaborateCode\EloquentLogs\Models\EloquentLog::with('loggable')->latest()->limit(5)->get()
 ```
 
 ### Muting Eloquent events

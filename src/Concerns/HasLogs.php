@@ -23,11 +23,14 @@ trait HasLogs
 
     public static function log(Model $model, string $event): void
     {
-        $model->eloquentLogs()->create(['action' => $event, 'user_id' => Auth::id(),]);
+        $model->eloquentLogs()->create([
+            'action' => $event,
+            'user_id' => Auth::id(),
+        ]);
     }
 
     public function eloquentLogs(): MorphMany
     {
-        return $this->morphMany(config('eloquent-logs.logs_model') ?? ElaborateCode\EloquentLogs\EloquentLog::class, 'loggable');
+        return $this->morphMany(config('eloquent-logs.logs_model') ?? ElaborateCode\EloquentLogs\Models\EloquentLog::class, 'loggable');
     }
 }

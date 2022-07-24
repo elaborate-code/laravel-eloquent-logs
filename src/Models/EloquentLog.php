@@ -1,6 +1,6 @@
 <?php
 
-namespace ElaborateCode\EloquentLogs;
+namespace ElaborateCode\EloquentLogs\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
