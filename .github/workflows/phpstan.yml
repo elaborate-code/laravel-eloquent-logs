@@ -19,13 +19,8 @@ jobs:
           php-version: "8.1"
           coverage: none
 
-      - name: allow-plugins.pestphp/pest-plugin
-        run: |
-          composer config --no-plugins allow-plugins.pestphp/pest-plugin false
-
       - name: Install composer dependencies
         uses: ramsey/composer-install@v1
 
       - name: Run PHPStan
-        run: |
-          ./vendor/bin/phpstan --error-format=github
+        run: ./vendor/bin/phpstan --error-format=github

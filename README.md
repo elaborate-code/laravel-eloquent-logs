@@ -5,7 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/Check%20&%20fix%20styling?label=code%20style)](https://github.com/elaborate-code/laravel-eloquent-logs/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/elaborate-code/laravel-eloquent-logs.svg?style=flat-square)](https://packagist.org/packages/elaborate-code/laravel-eloquent-logs)
 
-Log the changes (`created`/`updated`/`deleted`/`trashed`/`restored`/`forceDeleted`) that occurs on your Eloquent models, check which user made them and when.
+Log the changes (`created`/`updated`/`deleted`/`trashed`/`restored`/`forceDeleted`) that occurs on your Eloquent models and check which user made them and when.
 
 ## Installation
 
@@ -20,6 +20,8 @@ Run the migrations:
 ```bash
 php artisan migrate
 ```
+
+### Publishing files
 
 You can publish the migrations with:
 
@@ -53,16 +55,19 @@ Pick an **Eloquent model** that you want to log the changes that happen to it an
 ```php
 namespace App\Models;
 
-use ElaborateCode\EloquentLogs\Concerns\HasLogs; // Changed
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Example extends Model
 {
-    use HasFactory, HasLogs; // Changed
+    use HasFactory, \ElaborateCode\EloquentLogs\Concerns\HasLogs; // Changed
     // ...
 }
 ```
+
+Important warning from [Laravel docs](https://laravel.com/docs/9.x/eloquent#events:~:text=When%20issuing%20a%20mass%20update%20or,when%20performing%20mass%20updates%20or%20deletes.)
+
+> When issuing a **mass update or delete** query via Eloquent, the `saved`, `updated`, `deleting`, and `deleted` model events will not be dispatched for the affected models. This is because the models are never actually retrieved when performing mass updates or deletes.
 
 ### Muting Eloquent events
 
@@ -99,7 +104,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 Please see [CONTRIBUTING](https://github.com/elaborate-code/.github/blob/main/CONTRIBUTING.md) for details.
 
-###
+### TODO
 
 - Add choice to use log files instead of the database.
 - Set on the models which listeners to register.

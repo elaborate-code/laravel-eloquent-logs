@@ -40,7 +40,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer config --no-plugins allow-plugins.pestphp/pest-plugin true
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
