@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-eloquent-logs` will be documented in this file.
 
+## 1.0.0 - 2022-07-24
+
+### New Contributors
+
+- @medilies made their first contribution in https://github.com/elaborate-code/laravel-eloquent-logs/pull/1
+
+**Full Changelog**: https://github.com/elaborate-code/laravel-eloquent-logs/commits/1.0.0
+
 ## 0.4.0 - 2022-07-24
 
 **Full Changelog**: https://github.com/elaborate-code/laravel-eloquent-logs/compare/0.3.0...0.4.0
