@@ -3,10 +3,10 @@
 ![Packagist Version](https://img.shields.io/packagist/v/elaborate-code/laravel-eloquent-logs?style=for-the-badge)
 ![Packagist Downloads (custom server)](https://img.shields.io/packagist/dt/elaborate-code/laravel-eloquent-logs?style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/run-tests?label=Tests&style=for-the-badge)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/Fix%20PHP%20code%20style%20issues?label=GitHub%20Code%20Style%20Action%20Status&style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/Fix%20PHP%20code%20style%20issues?label=Code%20Style&style=for-the-badge)
 
 
-Log the changes (`created`/`updated`/`deleted`/`soft deleted`/`restored`/`force deleted`) that occurs on your Eloquent models and check which user made them and when.
+Log the changes that occurs on your Eloquent models and check which user made them and when (`created`/`updated`/`deleted`/`soft deleted`/`restored`/`force deleted`). 
 
 ## Installation
 
@@ -48,6 +48,8 @@ return [
 
 ];
 ```
+
+That allows you to rename the `logs_table` before running the migrations.
 
 ## Usage
 
@@ -103,7 +105,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
+    use WithoutModelEvents; // Add this trait
 
     public function run(): void
     {
