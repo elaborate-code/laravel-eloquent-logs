@@ -1,11 +1,10 @@
 {
     "name": "elaborate-code/laravel-eloquent-logs",
-    "description": "Log CRUD operations that happen on Eloquent models",
+    "description": "A simple way to log changes that occur on Eloquent models",
     "keywords": [
-        "elaborate-code",
         "laravel",
         "eloquent",
-        "laravel-eloquent-logs"
+        "log"
     ],
     "homepage": "https://github.com/elaborate-code/laravel-eloquent-logs",
     "license": "MIT",

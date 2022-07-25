@@ -5,6 +5,7 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/run-tests?label=Tests&style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/Fix%20PHP%20code%20style%20issues?label=Code%20Style&style=for-the-badge)
 
+![banner](https://banners.beyondco.de/Eloquent%20logs.png?theme=dark&packageManager=composer+require&packageName=elaborate-code%2Flaravel-eloquent-logs&pattern=circuitBoard&style=style_1&description=A+simple+way+to+log+changes+that+occur+on+Eloquent+models&md=1&showWatermark=0&fontSize=100px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg)
 
 Log the changes that occurs on your Eloquent models and check which user made them and when (`created`/`updated`/`deleted`/`soft deleted`/`restored`/`force deleted`). 
 
