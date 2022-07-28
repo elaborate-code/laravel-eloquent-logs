@@ -2,13 +2,13 @@
 
 use ElaborateCode\EloquentLogs\Tests\Models\FakeModel;
 
-it('logs model updated', function () {
+it('logs model deleted', function () {
     $fake_model = FakeModel::create(['name' => 'foo']);
-    $fake_model->update(['name' => 'bar']);
+    $fake_model->delete();
 
     $this
         ->assertDatabaseHas('eloquent_logs', [
-            'action' => 'updated',
+            'action' => 'deleted',
             'loggable_type' => FakeModel::class,
             'loggable_id' => $fake_model->id,
         ])

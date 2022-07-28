@@ -2,7 +2,7 @@
 
 use ElaborateCode\EloquentLogs\Tests\Models\SoftDeletedFakeModel;
 
-it('logs loggable model restoration', function () {
+it('logs model restored', function () {
     $fake_model = SoftDeletedFakeModel::create(['name' => 'foo']);
     $fake_model->delete();
     $fake_model->restore(); // ! Extra updated event

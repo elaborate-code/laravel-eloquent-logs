@@ -2,7 +2,7 @@
 
 use ElaborateCode\EloquentLogs\Tests\Models\SoftDeletedFakeModel;
 
-it('logs model FORCED deletion', function () {
+it('logs model force deleted', function () {
     $fake_model = SoftDeletedFakeModel::create(['name' => 'foo']);
     $fake_model->forceDelete();
 
