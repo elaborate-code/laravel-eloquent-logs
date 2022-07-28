@@ -8,10 +8,9 @@ return new class() extends Migration
 {
     public function up()
     {
-        Schema::create('fake_models', function (Blueprint $table) {
+        Schema::create('soft_deleted_fake_models', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('meta');
             $table->softDeletes();
         });
     }

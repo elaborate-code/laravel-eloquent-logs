@@ -14,11 +14,7 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        $this->loadLaravelMigrations();
-
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-        // Use this for the FakeModel in tests.
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
@@ -31,11 +27,6 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'sqlite');
-        config()->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ]);
+        config()->set('database.default', 'testing');
     }
 }
