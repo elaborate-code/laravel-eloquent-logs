@@ -10,20 +10,39 @@ trait HasLogs
 {
     public static function bootHasLogs(): void
     {
-        self::created(callback: fn ($model) => self::log($model, 'created'));
-        self::updated(callback: fn ($model) => self::log($model, 'updated'));
-
-        self::deleted(callback: function ($model) {
-            in_array('Illuminate\Database\Eloquent\SoftDeletes', (class_uses(self::class))) ?
-                "This is a softDeleted or a forceDeleted so don't log" :
-                self::log($model, 'deleted');
+        self::created(callback: function ($model) {
+            self::log($model, 'created');
         });
 
-        if (in_array('Illuminate\Database\Eloquent\SoftDeletes', (class_uses(self::class)))) {
-            self::softDeleted(callback: fn ($model) => self::log($model, 'soft deleted'));
-            self::restored(callback: fn ($model) => self::log($model, 'restored'));
-            self::forceDeleted(callback: fn ($model) => self::log($model, 'force deleted'));
+        self::updated(callback: function ($model) {
+            self::log($model, 'updated');
+        });
+
+        self::deleted(callback: function ($model) {
+            if (in_array('Illuminate\Database\Eloquent\SoftDeletes', (class_uses(self::class)))) {
+                // This is a softDeleted or a forceDeleted event so don't log!
+                return;
+            }
+
+            self::log($model, 'deleted');
+        });
+
+        if (! in_array('Illuminate\Database\Eloquent\SoftDeletes', (class_uses(self::class)))) {
+            // This model will not fire restore, soft delete and force delete events!
+            return;
         }
+
+        self::softDeleted(callback: function ($model) {
+            self::log($model, 'soft deleted');
+        });
+
+        self::forceDeleted(callback: function ($model) {
+            self::log($model, 'force deleted');
+        });
+
+        self::restored(callback: function ($model) {
+            self::log($model, 'restored');
+        });
     }
 
     public static function log(Model $model, string $event): void
