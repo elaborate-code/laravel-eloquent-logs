@@ -13,6 +13,5 @@ it('logs model restored', function () {
             'loggable_type' => SoftDeletedFakeModel::class,
             'loggable_id' => $fake_model->id,
         ])
-        // ->assertDatabaseCount('eloquent_logs', 3)
-        ->assertDatabaseCount('eloquent_logs', 4);
+        ->assertDatabaseCount('eloquent_logs', 3);
 });

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 trait HasLogs
 {
+    public bool $loggableIsBeingRestored = false;
+
     public static function bootHasLogs(): void
     {
         self::created(callback: function ($model) {
@@ -15,6 +17,11 @@ trait HasLogs
         });
 
         self::updated(callback: function ($model) {
+            if (isset($model->loggableIsBeingRestored) && $model->loggableIsBeingRestored) {
+                // This is a restored event so don't log!
+                return;
+            }
+
             self::log($model, 'updated');
         });
 
@@ -42,6 +49,12 @@ trait HasLogs
 
         self::restored(callback: function ($model) {
             self::log($model, 'restored');
+
+            $model->loggableIsBeingRestored = false;
+        });
+
+        self::restoring(callback: function ($model) {
+            $model->loggableIsBeingRestored = true;
         });
     }
 
