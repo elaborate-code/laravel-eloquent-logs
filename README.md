@@ -7,7 +7,9 @@
 
 ![banner](https://banners.beyondco.de/Eloquent%20logs.png?theme=dark&packageManager=composer+require&packageName=elaborate-code%2Flaravel-eloquent-logs&pattern=circuitBoard&style=style_1&description=A+simple+way+to+log+changes+that+occur+on+Eloquent+models&md=1&showWatermark=0&fontSize=100px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg)
 
-Log the changes that occurs on your Eloquent models and check which user made them and when (`created`/`updated`/`deleted`/`soft deleted`/`restored`/`force deleted`). 
+Log what happens to your Eloquent models (`created`|`updated`|`deleted`|`soft deleted`|`restored`|`force deleted`) and keep and eye on **who** made the change, **how** and **when**. 
+
+This solution is simple to integrate and introduces minimal changes to your project: 1 migration, 1 model and 1 trait.
 
 ## Installation
 
@@ -94,7 +96,7 @@ And you can query logs directly:
 ElaborateCode\EloquentLogs\Models\EloquentLog::with('loggable')->latest()->limit(5)->get()
 ```
 
-### Muting Eloquent events
+### Muting Eloquent events [Laravel stuff]
 
 From seeders:
 
