@@ -1,9 +1,9 @@
 # laravel-eloquent-logs
 
-![Packagist Version](https://img.shields.io/packagist/v/elaborate-code/laravel-eloquent-logs?style=for-the-badge)
-![Packagist Downloads (custom server)](https://img.shields.io/packagist/dt/elaborate-code/laravel-eloquent-logs?style=for-the-badge)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/run-tests?label=Tests&style=for-the-badge)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/Fix%20PHP%20code%20style%20issues?label=Code%20Style&style=for-the-badge)
+[![Packagist Version](https://img.shields.io/packagist/v/elaborate-code/laravel-eloquent-logs?style=for-the-badge)](https://packagist.org/packages/elaborate-code/laravel-eloquent-logs)
+[![Packagist Downloads (custom server)](https://img.shields.io/packagist/dt/elaborate-code/laravel-eloquent-logs?style=for-the-badge)](https://packagist.org/packages/elaborate-code/laravel-eloquent-logs)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/run-tests?label=Tests&style=for-the-badge)](https://github.com/elaborate-code/laravel-eloquent-logs/actions/workflows/run-tests.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/Fix%20PHP%20code%20style%20issues?label=Code%20Style&style=for-the-badge)](https://github.com/elaborate-code/laravel-eloquent-logs/actions/workflows/fix-php-code-style-issues.yml)
 
 ![banner](https://banners.beyondco.de/Eloquent%20logs.png?theme=dark&packageManager=composer+require&packageName=elaborate-code%2Flaravel-eloquent-logs&pattern=circuitBoard&style=style_1&description=A+simple+way+to+log+changes+that+occur+on+Eloquent+models&md=1&showWatermark=0&fontSize=100px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg)
 
@@ -127,6 +127,10 @@ Anywhere from your code:
 ```
 
 Explore the [Eloquent docs](https://laravel.com/docs/9.x/eloquent#muting-events) for more options
+
+## Alternative
+
+Among the bajillion packages that Spatie has so graciously bestowed upon the community, you'll find the excellent [laravel-Alternative](https://github.com/spatie/laravel-activitylog) package. Like laravel-eloquent-logs, it nicely integrates with Laravel, but has a different set of design choices when it comes to DB structure & features. Checkout this [discussion](https://github.com/elaborate-code/laravel-eloquent-logs/discussions/5) for an extensive comparison.
 
 ## Testing
 
