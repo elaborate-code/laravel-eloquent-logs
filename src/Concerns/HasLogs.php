@@ -11,29 +11,26 @@ trait HasLogs
 {
     public bool $loggableBeingRestoredFlag = false;
 
-    public ?array $loggableOptions = null;
-
     public static function bootHasLogs(): void
     {
-        self::created([self::class, 'createdHandler']);
-
-        self::updated([self::class, 'updatedHandler']);
-
-        self::deleted([self::class, 'deletedHandler']);
-
-        if (! in_array('Illuminate\Database\Eloquent\SoftDeletes', (class_uses(self::class)))) {
-            // This model will not fire restore, soft delete and force delete events!
-            return;
+        foreach (['created', 'updated', 'deleted'] as $event) {
+            if (! self::isIgnored($event)) {
+                self::{$event}([self::class, "{$event}Handler"]);
+            }
         }
 
-        self::softDeleted([self::class, 'softDeletedHandler']);
+        if (in_array('Illuminate\Database\Eloquent\SoftDeletes', (class_uses(self::class)))) {
+            foreach (['softDeleted', 'forceDeleted', 'restored'] as $event) {
+                if (! self::isIgnored($event)) {
+                    self::{$event}([self::class, "{$event}Handler"]);
+                }
+            }
 
-        self::forceDeleted([self::class, 'forceDeletedHandler']);
-
-        self::restored([self::class, 'restoredHandler']);
-
-        // A work around Laravel firing many events when restored
-        self::restoring([self::class, 'setLoggableBeingRestoredFlag']);
+            // A work around Laravel firing many events when restored
+            if (! self::isIgnored('restored')) {
+                self::restoring([self::class, 'setLoggableBeingRestoredFlag']);
+            }
+        }
     }
 
     public static function log(Model $model, string $event): void
@@ -42,6 +39,26 @@ trait HasLogs
             'action' => $event,
             'user_id' => Auth::id(),
         ]);
+    }
+
+    public static function isIgnored(string $event): bool
+    {
+        if (
+            ! isset(self::$loggableOptions) ||
+            ! isset(self::$loggableOptions['ignore'])
+        ) {
+            return false;
+        }
+
+        if (! is_array(self::$loggableOptions['ignore'])) {
+            throw new \Exception('self::$loggableOptions[\'ignore\'] must be an array');
+        }
+
+        if (in_array($event, self::$loggableOptions['ignore'])) {
+            return true;
+        }
+
+        return false;
     }
 
     /*
@@ -56,7 +73,7 @@ trait HasLogs
      */
     public static function createdHandler(Model $model): void
     {
-        self::log($model, self::eventNameFromHandler(__FUNCTION__));
+        self::log($model, self::eventPhraseFromHandlerName(__FUNCTION__));
     }
 
     /**
@@ -69,7 +86,7 @@ trait HasLogs
             return;
         }
 
-        self::log($model, self::eventNameFromHandler(__FUNCTION__));
+        self::log($model, self::eventPhraseFromHandlerName(__FUNCTION__));
     }
 
     /**
@@ -82,7 +99,7 @@ trait HasLogs
             return;
         }
 
-        self::log($model, self::eventNameFromHandler(__FUNCTION__));
+        self::log($model, self::eventPhraseFromHandlerName(__FUNCTION__));
     }
 
     /**
@@ -90,7 +107,7 @@ trait HasLogs
      */
     public static function softDeletedHandler(Model $model): void
     {
-        self::log($model, self::eventNameFromHandler(__FUNCTION__));
+        self::log($model, self::eventPhraseFromHandlerName(__FUNCTION__));
     }
 
     /**
@@ -98,7 +115,7 @@ trait HasLogs
      */
     public static function forceDeletedHandler(Model $model): void
     {
-        self::log($model, self::eventNameFromHandler(__FUNCTION__));
+        self::log($model, self::eventPhraseFromHandlerName(__FUNCTION__));
     }
 
     /**
@@ -106,7 +123,7 @@ trait HasLogs
      */
     public static function restoredHandler(Model $model): void
     {
-        self::log($model, self::eventNameFromHandler(__FUNCTION__));
+        self::log($model, self::eventPhraseFromHandlerName(__FUNCTION__));
 
         self::resetLoggableBeingRestoredFlag($model);
     }
@@ -134,7 +151,7 @@ trait HasLogs
      * Transforms the string input to lower case separated by spaces
      * and rejects the 'Handler' substring if found
      */
-    public static function eventNameFromHandler(string $str): string
+    public static function eventPhraseFromHandlerName(string $str): string
     {
         return Str::snake(str_replace('Handler', '', $str), ' ');
     }
