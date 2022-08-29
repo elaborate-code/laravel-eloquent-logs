@@ -2,6 +2,7 @@
 
 namespace ElaborateCode\EloquentLogs\Concerns;
 
+use ElaborateCode\EloquentLogs\CacheEloquentLogQueries;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Auth;
@@ -35,10 +36,17 @@ trait HasLogs
 
     public static function log(Model $model, string $event): void
     {
-        $model->eloquentLogs()->create([
-            'action' => $event,
-            'user_id' => Auth::id(),
-        ]);
+        if (CacheEloquentLogQueries::isCaching()) {
+            CacheEloquentLogQueries::pushQuery($model, $event, Auth::id());
+
+            return;
+        }
+
+        $model->eloquentLogs()
+            ->create([
+                'action' => $event,
+                'user_id' => Auth::id(),
+            ]);
     }
 
     public static function isIgnored(string $event): bool
