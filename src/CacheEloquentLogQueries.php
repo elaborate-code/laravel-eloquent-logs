@@ -8,42 +8,42 @@ use Illuminate\Support\Facades\DB;
 
 class CacheEloquentLogQueries
 {
-    private static bool $caching = false;
+    private bool $caching = false;
 
-    private static array $queries = [];
+    private array $queries = [];
 
-    public static function start(): void
+    public function start(): void
     {
-        self::$caching = true;
+        $this->caching = true;
     }
 
-    public static function abort(): void
+    public function abort(): void
     {
-        self::$caching = false;
+        $this->caching = false;
     }
 
-    public static function flushQueries(): void
+    public function flushQueries(): void
     {
-        self::$queries = [];
+        $this->queries = [];
     }
 
-    public static function reset(): void
+    public function reset(): void
     {
-        self::$caching = false;
-        self::$queries = [];
+        $this->caching = false;
+        $this->queries = [];
     }
 
-    public static function isCaching(): bool
+    public function isCaching(): bool
     {
-        return self::$caching;
+        return $this->caching;
     }
 
-    public static function pushQuery(Model $model, string $event, ?int $user_id): void
+    public function pushQuery(Model $model, string $event, ?int $user_id): void
     {
         $user_id ??= Auth::id();
 
         array_push(
-            self::$queries,
+            $this->queries,
             [
                 'loggable_type' => get_class($model),
                 'loggable_id' => $model->id,
@@ -53,15 +53,15 @@ class CacheEloquentLogQueries
         );
     }
 
-    public static function execute(): void
+    public function execute(): void
     {
-        if (empty(self::$queries)) {
+        if (empty($this->queries)) {
             return;
         }
 
         DB::table(config('eloquent-logs.logs_table'))
-            ->insert(self::$queries);
+            ->insert($this->queries);
 
-        self::reset();
+        $this->reset();
     }
 }

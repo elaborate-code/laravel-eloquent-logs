@@ -61,7 +61,9 @@
             "providers": [
                 "ElaborateCode\\EloquentLogs\\EloquentLogsServiceProvider"
             ],
-            "aliases": {}
+            "aliases": {
+                "CacheEloquentLogQueries": "ElaborateCode\\EloquentLogs\\Facades\\CacheEloquentLogQueries"
+            }
         }
     },
     "minimum-stability": "dev",

@@ -2,7 +2,7 @@
 
 namespace ElaborateCode\EloquentLogs\Concerns;
 
-use ElaborateCode\EloquentLogs\CacheEloquentLogQueries;
+use ElaborateCode\EloquentLogs\Facades\CacheEloquentLogQueries;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Auth;

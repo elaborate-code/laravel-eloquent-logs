@@ -1,6 +1,6 @@
 <?php
 
-use ElaborateCode\EloquentLogs\CacheEloquentLogQueries;
+use ElaborateCode\EloquentLogs\Facades\CacheEloquentLogQueries;
 use ElaborateCode\EloquentLogs\Tests\Models\FakeModel;
 use function Pest\Laravel\assertDatabaseCount;
 
