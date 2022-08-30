@@ -14,23 +14,47 @@ class CacheEloquentLogQueries
 
     public function start(): void
     {
+        if ($this->isCaching()) {
+            throw new \Exception('Misplaced usage of the CacheEloquentLogQueries::start() queries cache is already set');
+        }
+
         $this->caching = true;
     }
 
-    public function abort(): void
+    /**
+     * Suspends caching without affecting the queries cache
+     */
+    public function suspend(): self
     {
+        if (! $this->isCaching()) {
+            throw new \Exception("Misplaced usage of the CacheEloquentLogQueries::suspend() queries cache isn't set");
+        }
+
         $this->caching = false;
+
+        return $this;
     }
 
-    public function flushQueries(): void
+    /**
+     * Flushes the queries cache without halting the caching process
+     */
+    public function flushQueries(): self
     {
         $this->queries = [];
+
+        return $this;
     }
 
+    /**
+     * Flushes the queries cache and suspends further caching
+     */
     public function reset(): void
     {
-        $this->caching = false;
-        $this->queries = [];
+        if (! $this->isCaching()) {
+            throw new \Exception("Misplaced usage of the CacheEloquentLogQueries::reset() queries cache isn't set");
+        }
+
+        $this->suspend()->flushQueries();
     }
 
     public function isCaching(): bool
@@ -46,6 +70,7 @@ class CacheEloquentLogQueries
             $this->queries,
             [
                 'loggable_type' => get_class($model),
+                /** @phpstan-ignore-next-line */
                 'loggable_id' => $model->id,
                 'action' => $event,
                 'user_id' => $user_id,
