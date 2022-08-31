@@ -12,6 +12,7 @@ class IgnoredModel extends Model
 
     public static array $loggableOptions = [
         'ignore' => ['created', 'updated', 'deleted', 'softDeleted', 'forceDeleted', 'restored'],
+        // 'ignore' => ['*'],
     ];
 
     /**

@@ -62,7 +62,10 @@ trait HasLogs
             throw new \Exception('self::$loggableOptions[\'ignore\'] must be an array');
         }
 
-        if (in_array($event, self::$loggableOptions['ignore'])) {
+        if (
+            in_array($event, self::$loggableOptions['ignore']) ||
+            in_array('*', self::$loggableOptions['ignore'])
+        ) {
             return true;
         }
 

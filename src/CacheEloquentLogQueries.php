@@ -62,6 +62,9 @@ class CacheEloquentLogQueries
         return $this->caching;
     }
 
+    /**
+     * Add query data to the cache
+     */
     public function pushQuery(Model $model, string $event, ?int $user_id): void
     {
         $user_id ??= Auth::id();

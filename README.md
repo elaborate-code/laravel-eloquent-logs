@@ -9,7 +9,7 @@
 
 Log what happens to your Eloquent models (`created`|`updated`|`deleted`|`soft deleted`|`restored`|`force deleted`) and keep and eye on **who** made the change, **how** and **when**. 
 
-This solution is simple to integrate and introduces minimal changes to your project: 1 migration, 1 model and 1 trait.
+This solution is simple to integrate and introduces minimal changes to your project: 1 migration, 1 model, 1 trait, and 1 facade.
 
 ## Installation
 
@@ -46,9 +46,7 @@ return [
     'logs_model' => \ElaborateCode\EloquentLogs\Models\EloquentLog::class,
     'logs_table' => 'eloquent_logs',
 
-    /** @phpstan-ignore-next-line */
     'user' => \App\Models\User::class,
-
 ];
 ```
 
@@ -61,12 +59,11 @@ Pick an **Eloquent model** that you want to log the changes that happen to it an
 ```php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Example extends Model
+class ExampleModel extends Model
 {
-    use HasFactory, \ElaborateCode\EloquentLogs\Concerns\HasLogs; // Changed
+    use \ElaborateCode\EloquentLogs\Concerns\HasLogs;
     // ...
 }
 ```
@@ -82,11 +79,11 @@ Important warning from [Laravel docs](https://laravel.com/docs/9.x/eloquent#even
 You can load a model's logs using the `eloquentLogs` relationship:
 
 ```php
-$example->eloquentLogs;
+$example_model->eloquentLogs;
 
-$example->load('eloquentLogs');
+$example_model->load('eloquentLogs');
 
-App\Models\Example::with('eloquentLogs')->find($id);
+App\Models\ExampleModel::with('eloquentLogs')->find($id);
 ```
 
 And you can query logs directly:
@@ -94,6 +91,74 @@ And you can query logs directly:
 ```php
 // latest 5 logs with affected models
 ElaborateCode\EloquentLogs\Models\EloquentLog::with('loggable')->latest()->limit(5)->get()
+```
+
+### Grouping queries
+
+By default each one model event will result in a query to log the action.
+
+```php
+$example_model = ExampleModel::create(['name' => 'foo']);
+
+$example_model->update(['name' => 'bar']);
+
+$example_model->delete();
+
+// ⚠️ This will result in 3 queries to insert the 3 events logs into the database  
+```
+
+You can improve the logging process by using the `CacheEloquentLogQueries` facade
+
+```php
+use ElaborateCode\EloquentLogs\Facades\CacheEloquentLogQueries;
+
+CacheEloquentLogQueries::start();
+
+$example_model = ExampleModel::create(['name' => 'foo']);
+
+$example_model->update(['name' => 'bar']);
+
+$example_model->delete();
+
+CacheEloquentLogQueries::execute();
+
+// 👍 This will result in 1 query to insert the 3 events logs into the database  
+```
+
+The facade includes other methods that you wouldn't necessarily need to use:
+
+```php
+// Stops caching and empties the cache without queries execution
+CacheEloquentLogQueries::reset();
+
+// Empties the cache but doesn't stop caching
+CacheEloquentLogQueries::flushQueries();
+
+// Stops caching until the reuse of start() and doesn't empty the cache
+CacheEloquentLogQueries::suspend();
+
+// Returns a boolean
+CacheEloquentLogQueries::isCaching();
+```
+
+### Ignoring events
+
+You can specify the events to not log on the model instances by listing the events to ignore on `YourModel::$loggableOptions['ignore']`.
+
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ExampleModel extends Model
+{
+    use \ElaborateCode\EloquentLogs\Concerns\HasLogs;
+
+    public static array $loggableOptions = [
+        'ignore' => ['created', 'updated', 'deleted', 'softDeleted', 'forceDeleted', 'restored'],
+    ];
+    // ...
+}
 ```
 
 ### Muting Eloquent events [Laravel stuff]
