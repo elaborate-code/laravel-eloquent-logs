@@ -4,6 +4,8 @@
 [![Packagist Downloads (custom server)](https://img.shields.io/packagist/dt/elaborate-code/laravel-eloquent-logs?style=for-the-badge)](https://packagist.org/packages/elaborate-code/laravel-eloquent-logs)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/run-tests?label=Tests&style=for-the-badge)](https://github.com/elaborate-code/laravel-eloquent-logs/actions/workflows/run-tests.yml)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elaborate-code/laravel-eloquent-logs/Fix%20PHP%20code%20style%20issues?label=Code%20Style&style=for-the-badge)](https://github.com/elaborate-code/laravel-eloquent-logs/actions/workflows/fix-php-code-style-issues.yml)
+![maintained](https://img.shields.io/maintenance/yes/2022)
+![Production ready](https://img.shields.io/badge/Production%20ready-no-red)
 
 ![banner](https://banners.beyondco.de/Eloquent%20logs.png?theme=dark&packageManager=composer+require&packageName=elaborate-code%2Flaravel-eloquent-logs&pattern=circuitBoard&style=style_1&description=A+simple+way+to+log+changes+that+occur+on+Eloquent+models&md=1&showWatermark=0&fontSize=100px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg)
 
