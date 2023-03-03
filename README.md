@@ -199,7 +199,7 @@ Explore the [Eloquent docs](https://laravel.com/docs/9.x/eloquent#muting-events)
 
 ## Alternative
 
-Among the bajillion packages that Spatie has so graciously bestowed upon the community, you'll find the excellent [laravel-Alternative](https://github.com/spatie/laravel-activitylog) package. Like laravel-eloquent-logs, it nicely integrates with Laravel, but has a different set of design choices when it comes to DB structure & features. Checkout this [discussion](https://github.com/elaborate-code/laravel-eloquent-logs/discussions/5) for an extensive comparison.
+Among the bajillion packages that Spatie has so graciously bestowed upon the community, you'll find the excellent [laravel-Alternative](https://github.com/spatie/laravel-activitylog) package.
 
 ## Testing
 
